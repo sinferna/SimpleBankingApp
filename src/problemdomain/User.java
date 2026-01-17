@@ -1,20 +1,39 @@
 package problemdomain;
 
 public class User {
+	private int id;
 	private String firstName;
 	private String lastName;
 	private String address;
 	private String phoneNumber;
-	private String accountBalance;
+	private float accountBalance = 0;
 	
-	public User(String firstName, String lastName, String address, String phoneNumber, String accountBalance) {
+	public User(int id, String firstName, String lastName, String address, String phoneNumber, float accountBalance) {
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.accountBalance = accountBalance;
 	}
-	
+
+	// empty constructor
+	public User() {
+		
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 	/**
 	 * @return the firstName
 	 */
@@ -66,14 +85,23 @@ public class User {
 	/**
 	 * @return the accountBalance
 	 */
-	public String getAccountBalance() {
+	public float getAccountBalance() {
 		return accountBalance;
 	}
 	/**
 	 * @param accountBalance the accountBalance to set
 	 */
-	public void setAccountBalance(String accountBalance) {
+	public void setAccountBalance(float accountBalance) {
 		this.accountBalance = accountBalance;
+	}
+	
+	public String formatForFile() {
+		return id + ";" 
+				+ firstName + ";" 
+				+ lastName + ";" 
+				+ address + ";" 
+				+ phoneNumber + ";" 
+				+ accountBalance;
 	}
 
 	@Override
