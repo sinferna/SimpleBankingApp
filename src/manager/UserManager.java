@@ -12,9 +12,11 @@ public class UserManager {
 	private Scanner keyboard;
 	
 	public UserManager() {
-		loadUsersFromFile();
+		// users needs to be initialized first otherwise if load...() is first users will still be null
+		// and load...() will take in a null users array 
 		users = new ArrayList<>();
 		keyboard = new Scanner(System.in);
+		loadUsersFromFile();
 	}
 	
 	public void loadUsersFromFile() {

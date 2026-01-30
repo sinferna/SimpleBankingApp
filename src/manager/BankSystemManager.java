@@ -44,8 +44,8 @@ public class BankSystemManager {
 			}
 			
 			if (!found || user == null) {
-				System.out.println("User not found. Please try again.");
-				return;
+				System.out.println("User not found. Please try again.\n");
+				DisplayBankMenu();
 			}
 			
 			// TODO: add exception if user doesn't exist
@@ -76,13 +76,13 @@ public class BankSystemManager {
 			}
 		}
 		else if (option == 2) {
-			User user = userManager.createUser(); // using User return from UserManager
+			User user = userManager.createUser();
 			saveFile();	
+			return;
 		}
 		else {
 			System.out.println("Invalid input. Please enter a valid option (1-2).");
 		}
-
 	}
 	
 	// create new user account - first name, last name, address, phone number, account balance
@@ -135,7 +135,6 @@ public class BankSystemManager {
 		{
 			e.printStackTrace();
 		}
-
 	}
 
 }
