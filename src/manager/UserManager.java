@@ -49,8 +49,8 @@ public class UserManager {
 	}
 	
 	public void displayUserManagerMenu(User user) {
-		System.out.println("1 - Edit existing account");
-		System.out.println("2 - Delete existing account");
+		System.out.println("\n1 - Edit existing account");
+		System.out.println("2 - Delete existing account\n");
 		
 		System.out.print("Enter an option: ");
 		int option = keyboard.nextInt();
@@ -72,7 +72,7 @@ public class UserManager {
 		// TODO: create way to randomize later
 		
 		int id = keyboard.nextInt();
-		keyboard.nextLine(); // consumes new line
+		keyboard.nextLine(); // consumes new line that is created after user presses enter
 		
 		System.out.println("Enter your first name: ");
 		String firstName = keyboard.nextLine();
@@ -100,8 +100,11 @@ public class UserManager {
 		System.out.println("1 - First Name");
 		System.out.println("2 - Last Name");
 		System.out.println("3 - Address");
-		System.out.println("4 - Phone number");
+		System.out.println("4 - Phone number\n");
+		System.out.print("Enter an option: ");
+		
 		int option = keyboard.nextInt();
+		keyboard.nextLine();
 		
 		if (option == 1) {
 			System.out.print("Enter new first name: ");

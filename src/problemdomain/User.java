@@ -106,11 +106,11 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "First name: " + firstName 
-				+ "Last name: " + lastName 
-				+ "Address: " + address 
-				+ "Phone number: " + phoneNumber
-				+ "Account balance: " + accountBalance;
+		return "\nFirst name: " + firstName + "\n"
+				+ "Last name: " + lastName + "\n" 
+				+ "Address: " + address + "\n" 
+				+ "Phone number: " + phoneNumber + "\n"
+				+ "Account balance: " + accountBalance + "\n";
 	}
 	
 }

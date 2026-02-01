@@ -23,13 +23,13 @@ public class BankSystemManager {
 		System.out.println("Welcome to Gwingotts!");
 		System.out.println("Choose an option to get started: ");
 		System.out.println("1 - Manage an existing account");
-		System.out.println("2 - Create a new account");
+		System.out.println("2 - Create a new account\n");
 		
-		System.out.print("Enter an option: ");
+		System.out.print("Enter an option: \n");
 		int option = keyboard.nextInt(); // holds whatever int the user enters
 		
 		if (option == 1) {
-			System.out.print("Enter the ID of the user you would like to edit: ");
+			System.out.print("\nEnter the ID of the user you would like to edit:\n");
 
 			int userId = keyboard.nextInt();
 			boolean found = false;
@@ -55,30 +55,35 @@ public class BankSystemManager {
 			System.out.println("3 - Withdraw");
 			System.out.println("4 - Deposit");
 			System.out.println("5 - Save & exit");	
+			System.out.println("\nEnter an option:");
+			int manageOption = keyboard.nextInt();
 			
-			if (option == 1) {
+			
+			if (manageOption == 1) {
 				manageAccount(user);
 			}
-			else if (option == 2) {
+			else if (manageOption == 2) {
 				checkBalance(user);
 			}
-			else if (option == 3) {
+			else if (manageOption == 3) {
 				withdraw(user);
 			}
-			else if (option == 4) {
+			else if (manageOption == 4) {
 				deposit(user);
 			}
-			else if (option == 5) {
+			else if (manageOption == 5) {
 				saveFile();
 			}
 			else {
 				System.out.println("Invalid entry. Please enter a valid option (1-5).");
 			}
 		}
+		
 		else if (option == 2) {
 			User user = userManager.createUser();
 			saveFile();	
-			return;
+			DisplayBankMenu();
+			// return;
 		}
 		else {
 			System.out.println("Invalid input. Please enter a valid option (1-2).");
@@ -120,7 +125,7 @@ public class BankSystemManager {
 	
 	// save database
 	public void saveFile() {
-		System.out.println("Saving to file...");
+		System.out.println("Saving to file...\n");
 		File file = new File(DATABASE);
 		try 
 		{
