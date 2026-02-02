@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+
+
 import problemdomain.User;
 
 public class BankSystemManager {
@@ -20,76 +22,105 @@ public class BankSystemManager {
 	
 	// display menu
 	public void DisplayBankMenu() {
-		System.out.println("Welcome to Gwingotts!");
-		System.out.println("Choose an option to get started: ");
-		System.out.println("1 - Manage an existing account");
-		System.out.println("2 - Create a new account\n");
+		boolean running = true; 
 		
-		System.out.print("Enter an option: \n");
-		int option = keyboard.nextInt(); // holds whatever int the user enters
-		
-		if (option == 1) {
-			System.out.print("\nEnter the ID of the user you would like to edit:\n");
-
-			int userId = keyboard.nextInt();
-			boolean found = false;
-			User user = new User();
+		while (running) {
+			System.out.println("Welcome to Gwingotts!");
+			System.out.println("Choose an option to get started:");
+			System.out.println("1 - Manage an existing account");
+			System.out.println("2 - Create a new account");
+			System.out.println("3 - Exit\n");
 			
-			for (User u : userManager.getUsers()) {
-				if (u.getId() == userId) {
-					System.out.println(u);
-					found = true;
-					user = u;
+			int option = -1; // default invalid value
+			while (true) {
+			    System.out.print("Enter an option: ");
+			    
+			    if (keyboard.hasNextInt()) {
+			        option = keyboard.nextInt();
+			        keyboard.nextLine(); // consume leftover newline
+			        break; // valid input, exit loop
+			    } else {
+			        System.out.println("Invalid input. Please enter a number (1-3).");
+			        keyboard.nextLine(); // consume the invalid input
+			    }
+			}
+			if (option == 1) {
+				System.out.print("\nEnter the ID of the user you would like to edit:\n");
+
+				int userId = keyboard.nextInt();
+				boolean found = false;
+				User user = new User();
+				
+				for (User u : userManager.getUsers()) {
+					if (u.getId() == userId) {
+						System.out.println(u);
+						found = true;
+						user = u;
+					}
+				}
+				
+				if (!found || user == null) {
+					System.out.println("User not found. Please try again.\n");
+					continue;
+				}
+				
+				// TODO: add exception if user doesn't exist
+				
+				boolean managingUser = true;
+
+				while (managingUser) {
+				    System.out.println("\n1 - Edit account");
+				    System.out.println("2 - Check account balance");
+				    System.out.println("3 - Withdraw");
+				    System.out.println("4 - Deposit");
+				    System.out.println("5 - Save & exit");    
+				    System.out.println("\nEnter an option:");
+
+				    int manageOption = keyboard.nextInt();
+				    keyboard.nextLine(); // consume newline
+
+				    if (manageOption == 1) {
+				        manageAccount(user);
+				        saveFile();    
+				    }
+				    else if (manageOption == 2) {
+				        checkBalance(user);
+				    }
+				    else if (manageOption == 3) {
+				        withdraw(user);
+				        saveFile();    
+				    }
+				    else if (manageOption == 4) {
+				        deposit(user);
+				        saveFile();    
+				    }
+				    else if (manageOption == 5) {
+				        saveFile();
+				        managingUser = false; // sends you back to main menu
+				    }
+				    else {
+				        System.out.println("Invalid entry. Please enter a valid option (1-5).");
+				    }
 				}
 			}
-			
-			if (!found || user == null) {
-				System.out.println("User not found. Please try again.\n");
-				DisplayBankMenu();
+
+			else if (option == 2) {
+				User user = userManager.createUser();
+				saveFile();	
 			}
 			
-			// TODO: add exception if user doesn't exist
+			else if (option == 3) {
+				running = false; // stops loop and ends program
+				System.out.println("Thank you for using Gwingotts!");
+			}
 			
-			System.out.println("1 - Edit account information");
-			System.out.println("2 - Check account balance");
-			System.out.println("3 - Withdraw");
-			System.out.println("4 - Deposit");
-			System.out.println("5 - Save & exit");	
-			System.out.println("\nEnter an option:");
-			int manageOption = keyboard.nextInt();
-			
-			
-			if (manageOption == 1) {
-				manageAccount(user);
-			}
-			else if (manageOption == 2) {
-				checkBalance(user);
-			}
-			else if (manageOption == 3) {
-				withdraw(user);
-			}
-			else if (manageOption == 4) {
-				deposit(user);
-			}
-			else if (manageOption == 5) {
-				saveFile();
-			}
 			else {
-				System.out.println("Invalid entry. Please enter a valid option (1-5).");
+				System.out.println("Invalid input. Please enter a valid option (1-3).");
+				keyboard.nextLine();
 			}
-		}
-		
-		else if (option == 2) {
-			User user = userManager.createUser();
-			saveFile();	
-			DisplayBankMenu();
-			// return;
-		}
-		else {
-			System.out.println("Invalid input. Please enter a valid option (1-2).");
 		}
 	}
-	
+
 	// create new user account - first name, last name, address, phone number, account balance
 	// edit user account
 	// delete user account
@@ -100,7 +131,7 @@ public class BankSystemManager {
 	// check balance 
 	public void checkBalance(User user) {
 		float balance = user.getAccountBalance();
-		System.out.println(balance);
+		System.out.println("Account balance: " + balance + "\n");
 	}
 	
 	// withdraw 
@@ -120,12 +151,12 @@ public class BankSystemManager {
 		keyboard.nextLine();
 		
 		user.setAccountBalance(user.getAccountBalance() + depositAmount);
-		System.out.println("Remaining balance: " + user.getAccountBalance());
+		System.out.println("New balance: " + user.getAccountBalance());
 	}
 	
 	// save database
 	public void saveFile() {
-		System.out.println("Saving to file...\n");
+		System.out.println("\nSaving to file...\n");
 		File file = new File(DATABASE);
 		try 
 		{

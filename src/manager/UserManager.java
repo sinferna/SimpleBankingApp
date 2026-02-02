@@ -49,21 +49,31 @@ public class UserManager {
 	}
 	
 	public void displayUserManagerMenu(User user) {
-		System.out.println("\n1 - Edit existing account");
-		System.out.println("2 - Delete existing account\n");
-		
-		System.out.print("Enter an option: ");
-		int option = keyboard.nextInt();
+	    boolean managingAccount = true;
 
-		if (option == 1) {
-			editUser(user);
-		}
-		else if (option == 2) {
-			deleteUser(user);
-		}
-		else {
-			System.out.println("Invalid entry. Please enter a valid option (1-2).");
-		}
+	    while (managingAccount) {
+	        System.out.println("\n1 - Edit account details");
+	        System.out.println("2 - Delete account");
+	        System.out.println("3 - Back\n");
+
+	        System.out.print("Enter an option: ");
+	        int option = keyboard.nextInt();
+	        keyboard.nextLine();
+
+	        if (option == 1) {
+	            editUser(user);
+	        }
+	        else if (option == 2) {
+	            deleteUser(user);
+	            managingAccount = false; // go back after delete
+	        }
+	        else if (option == 3) {
+	            managingAccount = false; // go back to account menu
+	        }
+	        else {
+	            System.out.println("Invalid entry. Please enter a valid option (1-3).");
+	        }
+	    }
 	}
 	
 	// create
