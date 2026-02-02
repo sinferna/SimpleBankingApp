@@ -22,9 +22,9 @@ public class BankSystemManager {
 	
 	// display menu
 	public void DisplayBankMenu() {
-		boolean running = true; 
+		boolean mainMenuRunning = true; 
 		
-		while (running) {
+		while (mainMenuRunning) {
 			System.out.println("Welcome to Gwingotts!");
 			System.out.println("Choose an option to get started:");
 			System.out.println("1 - Manage an existing account");
@@ -44,6 +44,7 @@ public class BankSystemManager {
 			        keyboard.nextLine(); // consume the invalid input
 			    }
 			}
+			
 			if (option == 1) {
 				System.out.print("\nEnter the ID of the user you would like to edit:\n");
 
@@ -112,7 +113,7 @@ public class BankSystemManager {
 			}
 			
 			else if (option == 3) {
-				running = false; // stops loop and ends program
+				mainMenuRunning = false; // stops loop and ends program
 				System.out.println("Thank you for using Gwingotts!");
 			}
 			
@@ -148,7 +149,7 @@ public class BankSystemManager {
 	
 	// deposit
 	public void deposit(User user) {
-		System.out.println("Enter the amount to deposit: ");
+		System.out.println("1Enter the amount to deposit: ");
 		int depositAmount = keyboard.nextInt();
 		keyboard.nextLine();
 		
