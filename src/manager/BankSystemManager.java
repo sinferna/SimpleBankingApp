@@ -69,7 +69,8 @@ public class BankSystemManager {
 				boolean managingUser = true;
 
 				while (managingUser) {
-				    System.out.println("\n1 - Edit account");
+					System.out.println("\nManage existing account:");
+				    System.out.println("1 - Edit account");
 				    System.out.println("2 - Check account balance");
 				    System.out.println("3 - Withdraw");
 				    System.out.println("4 - Deposit");
@@ -96,6 +97,7 @@ public class BankSystemManager {
 				    }
 				    else if (manageOption == 5) {
 				        saveFile();
+				        System.out.println("\nReturning to main menu...\n");
 				        managingUser = false; // sends you back to main menu
 				    }
 				    else {
@@ -131,7 +133,7 @@ public class BankSystemManager {
 	// check balance 
 	public void checkBalance(User user) {
 		float balance = user.getAccountBalance();
-		System.out.println("Account balance: " + balance + "\n");
+		System.out.println("\nAccount balance: " + balance + "\n");
 	}
 	
 	// withdraw 
@@ -151,7 +153,7 @@ public class BankSystemManager {
 		keyboard.nextLine();
 		
 		user.setAccountBalance(user.getAccountBalance() + depositAmount);
-		System.out.println("New balance: " + user.getAccountBalance());
+		System.out.println("\nNew balance: " + user.getAccountBalance());
 	}
 	
 	// save database
